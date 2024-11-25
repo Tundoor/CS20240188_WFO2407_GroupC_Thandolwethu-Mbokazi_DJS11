@@ -1,0 +1,38 @@
+body {
+  background-color: rgb(243, 243, 243);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.navbar-div {
+  height: 100vh;
+  width: 6%;
+  background-color: pink;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.644);
+
+}
+
+.top-search {
+  margin-top: 30px;
+}
+
+.bottom-search {
+  margin-top: auto;
+  margin-bottom: 30px;
+}
+
+.favourites {
+  margin-bottom: 20px;
+}
+
+.settings {
+  margin-top: 20px;
+}
