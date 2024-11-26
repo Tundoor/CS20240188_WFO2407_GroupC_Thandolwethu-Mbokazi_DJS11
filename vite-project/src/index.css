@@ -1,22 +1,23 @@
 body {
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(212, 212, 212);
   padding: 0;
   margin: 0;
-  overflow: hidden;
   box-sizing: border-box;
 }
 
+/* NavBar section */
 .navbar-div {
   height: 100vh;
   width: 6%;
   background-color: pink;
-  margin-left: auto;
+  right: 0;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 3;
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.644);
+  position: fixed;
+  box-shadow: 0 0 20px 5px rgba(255, 160, 160, 0.644);
+  overflow-y: auto;
 
 }
 
@@ -35,4 +36,102 @@ body {
 
 .settings {
   margin-top: 20px;
+}
+
+.home-div {
+  margin-bottom: 500px;
+}
+
+/* Logo Section  */
+.logo-div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 400px;
+  margin-left: 50px;
+
+}
+
+.logo {
+  font-family: 'Rubik Mono One', 'Courier New', Courier, monospace;
+  font-size: 3rem;
+  text-shadow: 2px 2px rgb(255, 200, 209);
+}
+
+.logo-div p {
+  margin-top: -30px;
+  font-style: italic;
+  font-family: "cursive";
+  text-shadow: 2px 2px rgb(255, 200, 209);
+}
+
+/* Recommendation Shows  */
+
+.rec-div {
+  margin-top: 80px;
+  margin-left: 50px;
+}
+
+.rec-header {
+  color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+  text-decoration: underline;
+}
+
+/* Cards */
+
+.card {
+  background-color: rgb(226, 226, 226);
+  height: 450px;
+  width: 300px;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 5px rgba(255, 160, 160, 0.644);
+}
+
+.card-image {
+  height: 150px;
+  width: 150px;
+  border: 3px;
+  border-color: black;
+  border-style: solid;
+}
+
+.card-title {
+  font-size: 1.7rem;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.card-seasons {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.card-episodes {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.desc-title {
+  font-size: 1.5rem;
+}
+
+/* Used webkit to shorten the lines of the paragragh */
+.card-desc {
+  font-size: 1rem;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  /* This is for compatibility for browsers that don't use webkit */
+
 }
