@@ -20,7 +20,7 @@ body {
 .navbar-div {
   height: 100vh;
   width: 6%;
-  background-color: pink;
+  background-color: #FFA3CC;
   right: 0;
   top: 0;
   display: flex;
@@ -132,10 +132,12 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  border-style: solid;
   border-radius: 20px;
-  box-shadow: 0 0 20px 5px rgba(255, 160, 160, 0.644);
+  box-shadow: 0 0 20px 5px rgba(255, 177, 221, 0.445);
   margin: 20px;
   cursor: pointer;
+
 }
 
 .card:hover {
@@ -192,4 +194,35 @@ body {
   line-clamp: 4;
   /* This is for compatibility for browsers that don't use webkit */
 
+}
+
+/* settings modal */
+
+.settingsDiv {
+  background-color: #FFA3CC;
+  height: 100vh;
+  width: 300px;
+  position: fixed;
+  right: 0;
+  z-index: 10;
+  padding: 30px;
+  box-shadow: 0 0 20px 5px rgba(5, 5, 5, 0.726);
+  display: flex;
+  flex-direction: column;
+  border-radius: 1px;
+  border-style: solid;
+}
+
+.themes {
+  font-size: 2rem;
+  margin-top: 40px;
+}
+
+.closeModal {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  background-color: red;
+  border-color: darkred;
+  margin-left: auto;
 }
