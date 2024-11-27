@@ -92,6 +92,28 @@ body {
 
 }
 
+/* Drop Down Menu */
+
+.genre-dropDown {
+  border-radius: 10px;
+  width: 200px;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  background-color: rgb(107, 107, 255);
+  color: white;
+}
+
+.genre-dropDown:hover {
+  background-color: rgb(75, 75, 179);
+}
+
+.genre-dropDown:focus {
+  box-shadow: 0 0 20px 5px rgba(75, 75, 179, 0.865);
+}
+
+/* Cards */
 
 .main-cards {
   display: grid;
@@ -101,7 +123,6 @@ body {
   margin-right: 20px;
 }
 
-/* Cards */
 
 .card {
   background-color: rgb(226, 226, 226);

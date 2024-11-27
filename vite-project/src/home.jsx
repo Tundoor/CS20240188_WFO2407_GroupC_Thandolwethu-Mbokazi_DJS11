@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
+import { Selection } from "./components/selection"
 
 function Home() {
     const [pods, setPods] = useState([])
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
 
+    const baseUrl = 'https://podcast-api.netlify.app'
     useEffect(() => {
-        fetch('https://podcast-api.netlify.app')
+        fetch(baseUrl)
 
             .then(res => {
                 if (!res.ok) {
@@ -42,9 +44,8 @@ function Home() {
                 </div>
                 <div className="main-div">
                     <h1 className="main-header">Our Selection</h1>
-                    <select name="All Genres" className="genre-dropDown">
-                        <option value="allGenres">All Genres</option>
-                    </select>
+                    {/* Attempt to make this dynamic */}
+                    <Selection />
                     <div className="main-cards">
                         {/*  Renders our shows on the browser */}
                         {pods.map((pods) => (
