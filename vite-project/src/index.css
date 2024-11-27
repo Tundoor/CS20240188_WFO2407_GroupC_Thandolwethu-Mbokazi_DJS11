@@ -5,6 +5,17 @@ body {
   box-sizing: border-box;
 }
 
+/* Error and loading States */
+
+.Error {
+  font-size: 5rem;
+  color: red;
+}
+
+.loading {
+  font-size: 4rem;
+}
+
 /* NavBar section */
 .navbar-div {
   height: 100vh;
@@ -67,29 +78,47 @@ body {
 
 /* Recommendation Shows  */
 
-.rec-div {
+.main-div {
   margin-top: 80px;
   margin-left: 50px;
+  margin-right: 50px;
 }
 
-.rec-header {
+.main-header {
   color: rgb(0, 0, 0);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  font-family: 'Rubik Mono One', 'Courier New', Courier, monospace;
   text-decoration: underline;
+
+}
+
+
+.main-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  margin-left: -35px;
+  margin-right: 20px;
 }
 
 /* Cards */
 
 .card {
   background-color: rgb(226, 226, 226);
-  height: 450px;
   width: 300px;
-  margin-top: 70px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   border-radius: 20px;
+  box-shadow: 0 0 20px 5px rgba(255, 160, 160, 0.644);
+  margin: 20px;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 20px 5px rgba(255, 160, 160, 0.644);
 }
 
@@ -102,7 +131,7 @@ body {
 }
 
 .card-title {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: bolder;
   text-decoration: underline;
 }
@@ -114,13 +143,21 @@ body {
 }
 
 .card-episodes {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .desc-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.card:hover .card-image {
+  opacity: 0.4;
+}
+
+.card:hover .card-info {
+  opacity: 0.8;
 }
 
 /* Used webkit to shorten the lines of the paragragh */
