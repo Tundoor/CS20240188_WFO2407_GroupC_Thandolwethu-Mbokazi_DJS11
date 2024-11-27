@@ -6,6 +6,7 @@ function Home() {
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
 
+    // Fetches data from our API    
     const baseUrl = 'https://podcast-api.netlify.app'
     useEffect(() => {
         fetch(baseUrl)
@@ -35,6 +36,10 @@ function Home() {
     if (loading) {
         return <p1 className="loading">LOADING...</p1>
     }
+
+    // Creates a new array of sorted titles 
+    const sortedPods = pods.sort((a, b) => a.title.localeCompare(b.title))
+    console.log(sortedPods)
     return (
         <>
             <div className="home-div">
@@ -48,13 +53,14 @@ function Home() {
                     <Selection />
                     <div className="main-cards">
                         {/*  Renders our shows on the browser */}
-                        {pods.map((pods) => (
+                        {sortedPods.map((pods) => (
                             <div className="card" key={pods.id}>
                                 <img className="card-image" src={pods.image}></img>
                                 <div className="card-info">
                                     <h1 className="card-title">{pods.title}</h1>
-                                    <h6 className="card-seasons">Seasons:</h6>
+                                    <h6 className="card-seasons">Seasons: {pods.seasons}</h6>
                                     <h6 className="card-episodes">Episodes: </h6>
+                                    <h6 className="card-episodes">Updated On: {new Date(pods.updated).toDateString()} </h6>
                                     <h2 className="desc-title">Description</h2>
                                     <p className="card-desc">{pods.description}</p>
                                 </div>
