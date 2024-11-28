@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { Selection } from "../components/selection"
+import NavBar from '../components/navbar'
+
 
 function Home() {
     const [pods, setPods] = useState([])
@@ -42,6 +44,7 @@ function Home() {
     console.log(sortedPods)
     return (
         <>
+            <NavBar />
             <div className="home-div">
                 <div className="logo-div">
                     <h1 className="logo">PodSphere</h1>
