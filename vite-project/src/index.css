@@ -3,6 +3,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
 }
 
 /* Error and loading States */
@@ -233,4 +234,87 @@ body {
 
 .link {
   text-decoration: none;
+}
+
+/* Podcast Landing Page */
+
+.podLandingPage {
+  background-color: rgb(212, 212, 212);
+}
+
+.mainPodcastHeader {
+  width: 100%;
+  height: 600px;
+  background-color: #AEAEAE;
+
+}
+
+.podcastHeaderTitleSect {
+  display: flex;
+  justify-content: space-between;
+}
+
+.podcastTitle {
+  font-size: 2rem;
+  font-family: 'Rubik Mono One', 'Courier New', Courier, monospace;
+  text-decoration: underline;
+  margin-top: 50px;
+  margin-left: 50px;
+  text-shadow: 2px 2px rgb(255, 200, 209);
+}
+
+.podTitleDiv {
+  width: 800px;
+}
+
+.podHome {
+  margin: 20px;
+
+}
+
+.podLandingDescription {
+  margin: 50px;
+  margin-top: -10px;
+  max-width: 90vw;
+}
+
+
+/* Seasons Div */
+
+.mainPodcastBody {
+  margin: 50px;
+}
+
+.season {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin: 50px;
+
+}
+
+.seasons {
+  height: 100px;
+  width: 500px;
+  background-color: #FFA3CC;
+  border-radius: 10px;
+  display: flex;
+  margin-left: 40px;
+  padding: 10px;
+  align-items: center;
+
+}
+
+.seasonNumber {
+  margin-left: 20px;
+}
+
+.season-image {
+  height: 80px;
+  width: 80px;
+  border: 3px;
+  font-size: 1.5rem;
+  border-color: black;
+  border-style: solid;
+  border-radius: 10px;
+  margin-left: 20px;
 }
