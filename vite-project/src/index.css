@@ -356,3 +356,10 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+.seasonLink {
+  color: black;
+}
+
+/* 
+  theme Toggle */

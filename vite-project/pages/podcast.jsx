@@ -54,16 +54,19 @@ function PodcastLanding() {
                     <h1 className="season">Season:</h1>
                     <div className="seasonsDiv">
                         {show.seasons.map((season) => (
-
-                            <div className="seasons">
-                                <img className="season-image" src={season.image}></img>
-                                <div className="seasonsInfo">
-                                    <h2 className="seasonNumber">{season.title}</h2>
-                                    <div className="seasonEpDiv">
-                                        <h3 className="seasonEps">Eps: {season.episodes.length} </h3>
+                            <Link className="link seasonLink" to={`podcast/episodes/${season.season}`} key={season.id}>
+                                <div className="seasons">
+                                    <img className="season-image" src={season.image}></img>
+                                    <div className="seasonsInfo">
+                                        <h2 className="seasonNumber">{season.title}</h2>
+                                        <div className="seasonEpDiv">
+                                            <h3 className="seasonEps">Eps: {season.episodes.length} </h3>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
+
+
 
                         ))}
                     </div>
