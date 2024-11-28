@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="../pages/podcast" element={<PodcastLanding />} />
+          <Route path="podcast" element={<PodcastLanding />} />
           <Route path="favourites" element={<Favourites />} />
         </Routes>
       </BrowserRouter>

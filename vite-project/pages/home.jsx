@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Selection } from "../components/selection"
 import NavBar from '../components/navbar'
+import { Link } from "react-router-dom"
 
 
 function Home() {
@@ -57,7 +58,7 @@ function Home() {
                     <div className="main-cards">
                         {/*  Renders our shows on the browser */}
                         {sortedPods.map((pods) => (
-                            <div className="card" key={pods.id}>
+                            <Link to="podcast" className="link"> <div className="card" key={pods.id}>
                                 <img className="card-image" src={pods.image}></img>
                                 <div className="card-info">
                                     <h1 className="card-title">{pods.title}</h1>
@@ -68,6 +69,7 @@ function Home() {
                                     <p className="card-desc">{pods.description}</p>
                                 </div>
                             </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
