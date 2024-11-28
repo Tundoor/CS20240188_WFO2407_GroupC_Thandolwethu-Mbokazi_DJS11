@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Home from "../pages/home"
 import PodcastLanding from '../pages/podcast';
 import Favourites from '../pages/favourites';
@@ -11,7 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path="podcast" element={<PodcastLanding />} />
+          {/* Takes us to the detail page for our podcasts */}
+          <Route path="podcast/id/:id" element={<PodcastLanding />} />
           <Route path="favourites" element={<Favourites />} />
         </Routes>
       </BrowserRouter>

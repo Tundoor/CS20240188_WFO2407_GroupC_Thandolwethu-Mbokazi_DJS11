@@ -10,9 +10,9 @@ function Home() {
     const [loading, setLoading] = useState(true)
 
     // Fetches data from our API    
-    const baseUrl = 'https://podcast-api.netlify.app'
+
     useEffect(() => {
-        fetch(baseUrl)
+        fetch('https://podcast-api.netlify.app')
 
             .then(res => {
                 if (!res.ok) {
@@ -42,7 +42,6 @@ function Home() {
 
     // Creates a new array of sorted titles 
     const sortedPods = pods.sort((a, b) => a.title.localeCompare(b.title))
-    console.log(sortedPods)
     return (
         <>
             <NavBar />
@@ -55,20 +54,21 @@ function Home() {
                     <h1 className="main-header">Our Selection</h1>
                     {/* Attempt to make this dynamic */}
                     <Selection />
-                    <div className="main-cards">
+                    <div className="main-cards" key={pods.id}>
                         {/*  Renders our shows on the browser */}
                         {sortedPods.map((pods) => (
-                            <Link to="podcast" className="link"> <div className="card" key={pods.id}>
-                                <img className="card-image" src={pods.image}></img>
-                                <div className="card-info">
-                                    <h1 className="card-title">{pods.title}</h1>
-                                    <h6 className="card-seasons">Seasons: {pods.seasons}</h6>
-                                    <h6 className="card-episodes">Episodes: </h6>
-                                    <h6 className="card-episodes">Updated On: {new Date(pods.updated).toDateString()} </h6>
-                                    <h2 className="desc-title">Description</h2>
-                                    <p className="card-desc">{pods.description}</p>
+                            <Link to={`podcast/id/${pods.id}`} className="link">
+                                <div className="card" key={pods.id}>
+                                    <img className="card-image" src={pods.image}></img>
+                                    <div className="card-info">
+                                        <h1 className="card-title">{pods.title}</h1>
+                                        <h6 className="card-seasons">Seasons: {pods.seasons}</h6>
+                                        <h6 className="card-episodes">Episodes: </h6>
+                                        <h6 className="card-episodes">Updated On: {new Date(pods.updated).toDateString()} </h6>
+                                        <h2 className="desc-title">Description</h2>
+                                        <p className="card-desc">{pods.description}</p>
+                                    </div>
                                 </div>
-                            </div>
                             </Link>
                         ))}
                     </div>
