@@ -287,6 +287,8 @@ body {
 }
 
 
+
+
 /* Seasons Div */
 
 .mainPodcastBody {
@@ -359,6 +361,28 @@ body {
 
 .seasonLink {
   color: black;
+}
+
+.showGenre {
+  margin-top: -20px;
+
+}
+
+.podcastGenre {
+  text-decoration: underline;
+  font-size: 2rem;
+}
+
+.epCard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.showPodcastDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 /* 
