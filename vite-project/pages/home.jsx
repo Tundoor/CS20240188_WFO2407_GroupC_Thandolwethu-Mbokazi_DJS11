@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Selection } from "./components/selection"
+import { Selection } from "../components/selection"
 
 function Home() {
     const [pods, setPods] = useState([])

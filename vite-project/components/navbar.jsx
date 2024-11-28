@@ -1,4 +1,4 @@
-import SettingsModal from "./components/themeModal"
+import SettingsModal from "./themeModal"
 import { useState } from "react"
 
 function NavBar() {
