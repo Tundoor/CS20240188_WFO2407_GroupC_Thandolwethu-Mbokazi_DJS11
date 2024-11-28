@@ -351,3 +351,8 @@ body {
   align-items: center;
   color: white;
 }
+
+.seasonsDiv {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
