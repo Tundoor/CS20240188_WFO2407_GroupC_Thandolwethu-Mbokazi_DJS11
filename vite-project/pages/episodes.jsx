@@ -10,14 +10,12 @@ function Episodes() {
     const params = useParams();
 
 
-    //Handles the rendering of shows on the UI
+    // Fetch data from the API
     useEffect(() => {
-        setLoading(true);
-
-        // Fetch data from the API
-        fetch(`https://podcast-api.netlify.app/id/${params.id}`)
-            .then((res) => res.json())
-            .then((data) => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`https://podcast-api.netlify.app/id/${params.id}`);
+                const data = await res.json();
                 console.log(data);
 
                 setData(data);
@@ -25,31 +23,34 @@ function Episodes() {
                 if (data && data.id === params.id) {
                     setShow(data);
                 }
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error("Error fetching data:", error);
-            })
-            .finally(() => {
-
+            } finally {
                 setLoading(false);
-            });
+            }
+        };
+
+        fetchData();
     }, [params.id]);
 
-
     useEffect(() => {
-        if (show && params.seasonTitle) {
-            const season = show.seasons.find(
-                (season) => season.title === `Season ${params.seasonTitle}`
-            );
+        const loadSeasonData = async () => {
+            if (show && params.seasonTitle) {
+                const season = show.seasons.find(
+                    (season) => season.title === `Season ${params.seasonTitle}`
+                );
 
-            console.log('Season found:', season);
+                console.log('Season found:', season);
 
-            if (season) {
-                setEpisode(season.episodes);
-            } else {
-                setEpisode([]);
+                if (season) {
+                    setEpisode(season.episodes);
+                } else {
+                    setEpisode([]);
+                }
             }
-        }
+        };
+
+        loadSeasonData();
     }, [show, params.seasonTitle]);
 
 
