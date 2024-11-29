@@ -63,7 +63,6 @@ function Home() {
                                     <div className="card-info">
                                         <h1 className="card-title">{pods.title}</h1>
                                         <h6 className="card-seasons">Seasons: {pods.seasons}</h6>
-                                        <h6 className="card-episodes">Episodes: </h6>
                                         <h6 className="card-episodes">Updated On: {new Date(pods.updated).toDateString()} </h6>
                                         <h2 className="desc-title">Description</h2>
                                         <p className="card-desc">{pods.description}</p>

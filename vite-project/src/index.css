@@ -373,6 +373,7 @@ body {
   font-size: 2rem;
 }
 
+
 .epCard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -383,6 +384,37 @@ body {
   justify-content: space-between;
   margin-top: 50px;
   margin-bottom: 50px;
+}
+
+.favBtn {
+  background-color: var(--primary-color);
+  margin-top: 15px;
+  color: white;
+  border-radius: 5px;
+  margin-right: 10px;
+  border-style: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.favBtn:hover {
+  background-color: #ff88f7;
+}
+
+.ep-card {
+  background-color: rgb(226, 226, 226);
+  width: 300px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-style: solid;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 5px rgba(255, 177, 221, 0.445);
+  margin: 20px;
+  color: black;
+
 }
 
 /* 

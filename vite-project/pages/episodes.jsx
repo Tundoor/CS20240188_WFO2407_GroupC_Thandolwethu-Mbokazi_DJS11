@@ -71,6 +71,10 @@ function Episodes() {
         loadSeasonData();
     }, [show, seasonId]);
 
+    // Handles our audio button 
+    const addListen = () => {
+
+    }
 
     if (loading) {
         return <p>Loading...</p>;
@@ -99,11 +103,14 @@ function Episodes() {
             <div className='epCard'>
                 {episode.map((ep, index) => (
                     <>
-                        <div className="card" key={ep.id}>
+                        <div className="ep-card" key={ep.id}>
                             <img className="card-image" src={data.image}></img>
-                            <div className="card-info">
+                            <div className="ep-info">
                                 <h1 className="card-title">{ep.title}</h1>
                                 <h6 className="card-episodes">Ep {index + 1}</h6>
+                                <button className='favBtn'>Favourite</button>
+                                <button className='favBtn'>Unfavourite</button>
+                                <button className='favBtn' onClick={() => (addListen)}>Listen</button>
                                 <h2 className="desc-title">Description</h2>
                                 <p className="card-desc">{ep.description}</p>
                             </div>
