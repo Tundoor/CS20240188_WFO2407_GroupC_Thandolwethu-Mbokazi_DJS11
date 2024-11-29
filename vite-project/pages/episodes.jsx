@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import AudioToggle from '../components/audio';
+
 
 
 function Episodes() {
@@ -12,6 +12,8 @@ function Episodes() {
     const { id, seasonId } = useParams();
     const abortControllerRef = useRef(null)
     const [openAudio, setAudio] = useState(false)
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false); // Track if audio is playing
+    const audioRefs = useRef([]);
 
 
     abortControllerRef.current = new AbortController
@@ -73,17 +75,7 @@ function Episodes() {
         loadSeasonData();
     }, [show, seasonId]);
 
-    function audioListen() {
-        return (
-            <div className="audio-info">
-                <img className="audio-image" src=""></img>
-                <audio controls >
-                    <source src="" type="audio/mp3" />
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        )
-    }
+
 
     if (loading) {
         return <p>Loading...</p>;
@@ -110,7 +102,6 @@ function Episodes() {
             </div>
 
             <div className='epCard'>
-                <AudioToggle id={id} />
                 {episode.map((ep, index) => (
                     <><div className="ep-card" key={ep.id}>
                         <img className="card-image" src={data.image}></img>
@@ -119,10 +110,12 @@ function Episodes() {
                             <h6 className="card-episodes">Ep {index + 1}</h6>
                             <button className='favBtn'>Favourite</button>
                             <button className='favBtn'>Unfavourite</button>
-                            <button className='favBtn' onClick={() => (setAudio)}>Listen</button>
-                            <h2 className="desc-title">Description</h2>
-                            <p className="card-desc">{ep.description}</p>
+                            <audio controls >
+                                <source src={ep.file} type="audio/mp3" />
+                                Your browser does not support the audio element.
+                            </audio>
                         </div>
+
                     </div>
                     </>
                 ))}
