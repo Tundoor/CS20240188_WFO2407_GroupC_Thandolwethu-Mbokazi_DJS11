@@ -29,3 +29,6 @@ Handle dynamic routes for different podcasts and episodes
 -Email: thandwem045@gmail.com
 -GitHub: https://github.com/Tundoor
 -LinkedIn: https://www.linkedin.com/in/thandolwethu-mbokazi-9bb309287/
+
+### Visual Aids For Presentation
+https://www.figma.com/board/Ka9bQNursQG2PavOlFVEy0/Design-Process?node-id=0-1&node-type=canvas&t=MvAY8W7sX9P4nye6-0
