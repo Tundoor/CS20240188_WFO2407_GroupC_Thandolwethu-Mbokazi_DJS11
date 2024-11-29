@@ -1,4 +1,4 @@
-import genre from "../genre"
+import genre from "./data/genre"
 
 export function Selection({ onGenreChange }) {
 

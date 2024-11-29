@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import AudioToggle from '../components/audio';
 
 
 function Episodes() {
@@ -14,7 +15,6 @@ function Episodes() {
 
 
     abortControllerRef.current = new AbortController
-    console.log(typeof seasonId)
 
     // Fetch data from the API
     useEffect(() => {
@@ -73,6 +73,17 @@ function Episodes() {
         loadSeasonData();
     }, [show, seasonId]);
 
+    function audioListen() {
+        return (
+            <div className="audio-info">
+                <img className="audio-image" src=""></img>
+                <audio controls >
+                    <source src="" type="audio/mp3" />
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        )
+    }
 
     if (loading) {
         return <p>Loading...</p>;
@@ -89,7 +100,7 @@ function Episodes() {
                     <h1 className="podcastTitle">Episodes for {show.title}</h1>
                 </div>
                 {/* Links Back to home page */}
-                <Link to="/">
+                <Link to="/home">
                     <div className="podHome">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="45" height="45" viewBox="0 0 24 24">
                             <path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 10 21 L 10 14 L 14 14 L 14 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z"></path>
@@ -99,21 +110,20 @@ function Episodes() {
             </div>
 
             <div className='epCard'>
+                <AudioToggle id={id} />
                 {episode.map((ep, index) => (
-                    <>
-
-                        <div className="ep-card" key={ep.id}>
-                            <img className="card-image" src={data.image}></img>
-                            <div className="ep-info">
-                                <h1 className="card-title">{ep.title}</h1>
-                                <h6 className="card-episodes">Ep {index + 1}</h6>
-                                <button className='favBtn'>Favourite</button>
-                                <button className='favBtn'>Unfavourite</button>
-                                <button className='favBtn' onClick={() => (setAudio)}>Listen</button>
-                                <h2 className="desc-title">Description</h2>
-                                <p className="card-desc">{ep.description}</p>
-                            </div>
+                    <><div className="ep-card" key={ep.id}>
+                        <img className="card-image" src={data.image}></img>
+                        <div className="ep-info">
+                            <h1 className="card-title">{ep.title}</h1>
+                            <h6 className="card-episodes">Ep {index + 1}</h6>
+                            <button className='favBtn'>Favourite</button>
+                            <button className='favBtn'>Unfavourite</button>
+                            <button className='favBtn' onClick={() => (setAudio)}>Listen</button>
+                            <h2 className="desc-title">Description</h2>
+                            <p className="card-desc">{ep.description}</p>
                         </div>
+                    </div>
                     </>
                 ))}
             </div>

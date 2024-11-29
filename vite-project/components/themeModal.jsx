@@ -8,13 +8,6 @@ export default function SettingsModal({ closeModal,
         <div className="settingsDiv">
             <button className="closeModal" onClick={() => closeModal()}>X</button>
 
-
-            <div className="DarkMode">
-                <h1 className="mode">Theme</h1>
-                <button className="Light" onClick={() => changeTheme('light')}>Light Mode</button>
-                <button className="Dark" onClick={() => changeTheme('dark')}>Dark Mode</button>
-            </div>
-
             <div className="orderDiv">
                 <h1 className="order">Sort by Title</h1>
                 <button className="A-Z" onClick={() => changeSortOrder('A-Z')}>A-Z</button>

@@ -10,8 +10,9 @@ function Home() {
     const [selectedGenre, setSelectedGenre] = useState("allGenres");
     const [theme, setTheme] = useState('light');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [sortOrder, setSortOrder] = useState("A-Z");
     const [updateOrder, setUpdateOrder] = useState("Most Recent");
+    const [sortOrder, setSortOrder] = useState("A-Z");
+
 
     // Fetches data from our API    
     useEffect(() => {
@@ -31,6 +32,10 @@ function Home() {
                 setLoading(false);
             });
     }, []);
+
+    const switchTheme = () => {
+
+    }
 
     // Sort podcasts by title  (A-Z or Z-A)
     const sortByTitle = (pods) => {
