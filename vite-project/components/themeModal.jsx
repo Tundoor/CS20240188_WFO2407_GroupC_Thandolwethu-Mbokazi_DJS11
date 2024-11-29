@@ -5,12 +5,9 @@ export default function SettingsModal({ closeModal }) {
         <div className="settingsDiv">
             <button className="closeModal" onClick={() => closeModal()}>X</button>
 
-            <div className="Update">
-                <button className="mostUpdate"> Most Recent Update</button>
-                <button className="LeastUpdate">Least Recent Update</button>
-            </div>
 
             <div className="DarkMode">
+                <h1 className="mode">Theme</h1>
                 <button className="Light">Light Mode</button>
                 <button className="Dark">Dark Mode</button>
             </div>
@@ -20,6 +17,13 @@ export default function SettingsModal({ closeModal }) {
                 <button className="A-Z">A-Z</button>
                 <button className="Z-A">Z-A</button>
             </div>
+
+            <div className="Update">
+                <h1 className="mode">Updated</h1>
+                <button className="mostUpdate"> Most Recent Update</button>
+                <button className="LeastUpdate">Least Recent Update</button>
+            </div>
+
 
         </div>
 

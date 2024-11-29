@@ -1,18 +1,51 @@
 import React from "react"
 import { Link, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 function PodcastLanding() {
     const [show, setShow] = useState(null)
     const params = useParams()
     console.log(params)
+    const abortControllerRef = useRef(null)
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
 
     useEffect(() => {
-        fetch(`https://podcast-api.netlify.app/id/${params.id}`)
-            .then((res) => res.json())
-            .then((data) => setShow(data))
-            .catch((error) => console.log)
-    }, [params.id])
+        // Initialize the abort controller inside the useEffect hook
+        abortControllerRef.current = new AbortController();
+
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`https://podcast-api.netlify.app/id/${params.id}`, {
+                    signal: abortControllerRef.current.signal // Correct usage of the abort signal
+                });
+
+                const data = await res.json();
+                console.log(data);
+                setData(data);
+
+                // Ensure the ID matches the URL parameter
+                if (data && data.id === params.id) {
+                    setShow(data);
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                if (error.name === "AbortError") {
+                    console.log("Aborted");
+                    return;
+                }
+                setError(error); // Set the error state
+            } finally {
+                setLoading(false); // Stop loading state
+            }
+        };
+
+        fetchData();
+
+
+    }, [params.id]);
 
 
     return (

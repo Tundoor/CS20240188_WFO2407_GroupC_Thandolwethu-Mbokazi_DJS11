@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 function Episodes() {
@@ -6,38 +6,56 @@ function Episodes() {
     const [show, setShow] = useState(null);
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true); // Track loading state
+    const [error, setError] = useState(null);
+    const { id, seasonTitle } = useParams();
+    const abortControllerRef = useRef(null)
 
-    const params = useParams();
+
+    abortControllerRef.current = new AbortController
 
 
     // Fetch data from the API
     useEffect(() => {
+
+        if (!abortControllerRef.current) {
+            abortControllerRef.current = new AbortController();
+            console.log("Initialized new AbortController: ", abortControllerRef.current);
+        }
+
         const fetchData = async () => {
             try {
-                const res = await fetch(`https://podcast-api.netlify.app/id/${params.id}`);
+                const res = await fetch(`https://podcast-api.netlify.app/id/${id}`, {
+                    signal: abortControllerRef.current.signal // Correct placement of signal in fetch options
+                });
+
                 const data = await res.json();
                 console.log(data);
-
                 setData(data);
 
-                if (data && data.id === params.id) {
+                // Ensure the ID matches the URL parameter
+                if (data && data.id === id) {
                     setShow(data);
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
+                if (error.name === "AbortError") {
+                    console.log("Aborted");
+                    return;
+                }
+                setError(error);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchData();
-    }, [params.id]);
+    }, [id]);
 
     useEffect(() => {
         const loadSeasonData = async () => {
-            if (show && params.seasonTitle) {
+            if (show && seasonTitle) {
                 const season = show.seasons.find(
-                    (season) => season.title === `Season ${params.seasonTitle}`
+                    (season) => season.title === `Season ${seasonTitle}`
                 );
 
                 console.log('Season found:', season);
@@ -51,11 +69,15 @@ function Episodes() {
         };
 
         loadSeasonData();
-    }, [show, params.seasonTitle]);
+    }, [show, seasonTitle]);
 
 
     if (loading) {
         return <p>Loading...</p>;
+    }
+
+    if (!show) {
+        return <p>No podcast data available</p>;
     }
 
     return (
