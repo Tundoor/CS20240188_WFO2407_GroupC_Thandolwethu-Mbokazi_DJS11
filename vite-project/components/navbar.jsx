@@ -2,13 +2,19 @@ import SettingsModal from "./themeModal"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-function NavBar() {
+function NavBar({ changeTheme, changeSortOrder, changeUpdateOrder }) {
 
     // State for the settings modal 
     const [openSettings, setSettings] = useState(false)
     return (
         <>
-            {openSettings && <SettingsModal closeModal={setSettings} />}
+            {openSettings && <SettingsModal
+                closeModal={setSettings}
+                changeTheme={changeTheme}
+                changeSortOrder={changeSortOrder}
+                changeUpdateOrder={changeUpdateOrder}
+
+            />}
             <div className="navbar-div">
                 <div className="top-search">
                     <Link to="/favourites"><div className="favourites">

@@ -1,43 +1,66 @@
-import { useEffect, useState } from "react"
-import { Selection } from "../components/selection"
-import NavBar from '../components/navbar'
-import { Link } from "react-router-dom"
-import genres from "../genre"
-
+import { useEffect, useState } from "react";
+import { Selection } from "../components/selection";
+import NavBar from '../components/navbar';
+import { Link } from "react-router-dom";
 
 function Home() {
-    const [pods, setPods] = useState([])
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [selectedGenre, setSelectedGenre] = useState("allGenres")
+    const [pods, setPods] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedGenre, setSelectedGenre] = useState("allGenres");
+    const [theme, setTheme] = useState('light');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [sortOrder, setSortOrder] = useState("A-Z");
+    const [updateOrder, setUpdateOrder] = useState("Most Recent");
 
     // Fetches data from our API    
-
     useEffect(() => {
         fetch('https://podcast-api.netlify.app')
-
             .then(res => {
                 if (!res.ok) {
-                    throw Error("Data Fetching Failed") // This will be our error message
+                    throw Error("Data Fetching Failed");
                 }
-                return res.json()
+                return res.json();
             })
             .then(data => {
                 setPods(data);
-                setLoading(false)
-            }
-            )
+                setLoading(false);
+            })
             .catch((error) => {
-                setError(error.message)
-                setLoading(false)
+                setError(error.message);
+                setLoading(false);
+            });
+    }, []);
+
+    // Sort podcasts by title  (A-Z or Z-A)
+    const sortByTitle = (pods) => {
+        return [...pods].sort((a, b) => {
+            if (sortOrder === "A-Z") {
+                return a.title.localeCompare(b.title);
+            } else {
+                return b.title.localeCompare(a.title);
             }
-            )
-    }, [])
+        });
+    };
+
+    // Sort podcasts by update date (most recent or least recent)
+    const sortByDate = (pods) => {
+        return [...pods].sort((a, b) => {
+            if (updateOrder === "Most Recent") {
+                return new Date(b.updated) - new Date(a.updated); // Most recent first
+            } else {
+                return new Date(a.updated) - new Date(b.updated); // Least recent first
+            }
+        });
+    };
+
+    const toggleModal = () => setIsModalOpen(!isModalOpen);
+    const changeSortOrder = (newSortOrder) => setSortOrder(newSortOrder);
+    const changeUpdateOrder = (newUpdateOrder) => setUpdateOrder(newUpdateOrder);
 
     // Genre matching 
-
     const handleGenreChange = (genre) => {
-        setSelectedGenre(genre); // Update the selected genre
+        setSelectedGenre(genre);
     };
 
     // Filter the podcasts based on selected genre
@@ -45,22 +68,27 @@ function Home() {
         ? pods
         : pods.filter(pod => pod.genres.includes(parseInt(selectedGenre)));
 
-    // Creates a new array of sorted titles 
-    const sortedPods = filteredPods.sort((a, b) => a.title.localeCompare(b.title));
+    // Apply sorting logic
+    let sortedPods = sortByTitle(filteredPods);
+    sortedPods = sortByDate(sortedPods);
 
     if (error) {
-        return <p1 className="Error">Failed To Fetch Data</p1>
+        return <p1 className="Error">Failed To Fetch Data</p1>;
     }
 
     if (loading) {
-        return <p1 className="loading">LOADING...</p1>
+        return <p1 className="loading">LOADING...</p1>;
     }
-
-
 
     return (
         <>
-            <NavBar />
+            <NavBar
+                closeModal={toggleModal}
+                changeTheme={setTheme}
+                changeSortOrder={changeSortOrder}
+                changeUpdateOrder={changeUpdateOrder}
+            />
+
             <div className="home-div">
                 <div className="logo-div">
                     <h1 className="logo">PodSphere</h1>
@@ -74,9 +102,9 @@ function Home() {
                     <div className="main-cards" key={pods.id}>
                         {/*  Renders our shows on the browser */}
                         {sortedPods.map((pods) => (
-                            <Link to={`podcast/id/${pods.id}`} className="link">
-                                <div className="card" key={pods.id}>
-                                    <img className="card-image" src={pods.image}></img>
+                            <Link to={`podcast/id/${pods.id}`} className="link" key={pods.id}>
+                                <div className="card">
+                                    <img className="card-image" src={pods.image} alt={pods.title} />
                                     <div className="card-info">
                                         <h1 className="card-title">{pods.title}</h1>
                                         <h6 className="card-seasons">Seasons: {pods.seasons}</h6>
@@ -90,10 +118,8 @@ function Home() {
                     </div>
                 </div>
             </div>
-
-
         </>
-    )
+    );
 }
 
-export default Home 
+export default Home;
