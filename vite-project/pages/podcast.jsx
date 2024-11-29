@@ -74,10 +74,18 @@ function PodcastLanding() {
                             <p>{show.description}</p>
                         </div>
                         <h2 className="podcastGenre">Genre</h2>
-                        {show.genres.map((genre) => {
-                            return <h2 className="showGenre">{genre}</h2>
+                        {/* Checks if my genre is available or not */}
+                        {
+                            !show.genres ? (
+                                <h2>Genre not available</h2>
+                            ) : (
+                                show.genres.map((genre, index) => (
+                                    <h2 key={index} className="showGenre">
+                                        {genre}
+                                    </h2>
+                                ))
+                            )
                         }
-                        )}
                     </div>
                     <div className="podcastInfo">
                         <h2></h2>
