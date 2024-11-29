@@ -74,6 +74,10 @@ function PodcastLanding() {
                             <p>{show.description}</p>
                         </div>
                         <h2 className="podcastGenre">Genre</h2>
+                        {show.genres.map((genre) => {
+                            return <h2 className="showGenre">{genre}</h2>
+                        }
+                        )}
                     </div>
                     <div className="podcastInfo">
                         <h2></h2>
