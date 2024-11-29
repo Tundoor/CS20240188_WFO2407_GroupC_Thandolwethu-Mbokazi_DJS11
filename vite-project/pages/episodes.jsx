@@ -7,12 +7,12 @@ function Episodes() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true); // Track loading state
     const [error, setError] = useState(null);
-    const { id, seasonTitle } = useParams();
+    const { id, seasonId } = useParams();
     const abortControllerRef = useRef(null)
 
 
     abortControllerRef.current = new AbortController
-
+    console.log(typeof seasonId)
 
     // Fetch data from the API
     useEffect(() => {
@@ -53,9 +53,9 @@ function Episodes() {
 
     useEffect(() => {
         const loadSeasonData = async () => {
-            if (show && seasonTitle) {
+            if (show && seasonId) {
                 const season = show.seasons.find(
-                    (season) => season.title === `Season ${seasonTitle}`
+                    (season) => season.season === Number(seasonId)
                 );
 
                 console.log('Season found:', season);
@@ -69,7 +69,7 @@ function Episodes() {
         };
 
         loadSeasonData();
-    }, [show, seasonTitle]);
+    }, [show, seasonId]);
 
 
     if (loading) {

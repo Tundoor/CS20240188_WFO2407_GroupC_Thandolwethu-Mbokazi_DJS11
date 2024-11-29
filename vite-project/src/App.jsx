@@ -13,7 +13,7 @@ function App() {
           <Route path='/' element={<Home />} />
           {/* Takes us to the detail page for our podcasts */}
           <Route path="podcast/id/:id" element={<PodcastLanding />} />
-          <Route path="/podcast/id/:id/podcast/episodes/:seasonTitle" element={<Episodes />} />
+          <Route path="/podcast/id/:id/podcast/episodes/:seasonId" element={<Episodes />} />
           <Route path="favourites" element={<Favourites />} />
         </Routes>
       </BrowserRouter>
