@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import { Selection } from "../components/selection"
 import NavBar from '../components/navbar'
 import { Link } from "react-router-dom"
+import genres from "../genre"
 
 
 function Home() {
     const [pods, setPods] = useState([])
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [selectedGenre, setSelectedGenre] = useState("allGenres")
 
     // Fetches data from our API    
 
@@ -32,6 +34,20 @@ function Home() {
             )
     }, [])
 
+    // Genre matching 
+
+    const handleGenreChange = (genre) => {
+        setSelectedGenre(genre); // Update the selected genre
+    };
+
+    // Filter the podcasts based on selected genre
+    const filteredPods = selectedGenre === "allGenres"
+        ? pods
+        : pods.filter(pod => pod.genres.includes(parseInt(selectedGenre)));
+
+    // Creates a new array of sorted titles 
+    const sortedPods = filteredPods.sort((a, b) => a.title.localeCompare(b.title));
+
     if (error) {
         return <p1 className="Error">Failed To Fetch Data</p1>
     }
@@ -40,8 +56,8 @@ function Home() {
         return <p1 className="loading">LOADING...</p1>
     }
 
-    // Creates a new array of sorted titles 
-    const sortedPods = pods.sort((a, b) => a.title.localeCompare(b.title))
+
+
     return (
         <>
             <NavBar />
@@ -53,7 +69,8 @@ function Home() {
                 <div className="main-div">
                     <h1 className="main-header">Our Selection</h1>
                     {/* Attempt to make this dynamic */}
-                    <Selection />
+                    <Selection onGenreChange={handleGenreChange} />
+
                     <div className="main-cards" key={pods.id}>
                         {/*  Renders our shows on the browser */}
                         {sortedPods.map((pods) => (
