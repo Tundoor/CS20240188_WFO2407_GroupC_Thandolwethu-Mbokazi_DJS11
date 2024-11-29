@@ -16,7 +16,7 @@ export default function SettingsModal({ closeModal,
             </div>
 
             <div className="orderDiv">
-                <h1 className="order">lexicographical order</h1>
+                <h1 className="order">Sort by Title</h1>
                 <button className="A-Z" onClick={() => changeSortOrder('A-Z')}>A-Z</button>
                 <button className="Z-A" onClick={() => changeSortOrder('Z-A')}>Z-A</button>
             </div>
