@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+
 function Episodes() {
     const [episode, setEpisode] = useState([]);
     const [show, setShow] = useState(null);
@@ -9,6 +10,7 @@ function Episodes() {
     const [error, setError] = useState(null);
     const { id, seasonId } = useParams();
     const abortControllerRef = useRef(null)
+    const [openAudio, setAudio] = useState(false)
 
 
     abortControllerRef.current = new AbortController
@@ -71,10 +73,6 @@ function Episodes() {
         loadSeasonData();
     }, [show, seasonId]);
 
-    // Handles our audio button 
-    const addListen = () => {
-
-    }
 
     if (loading) {
         return <p>Loading...</p>;
@@ -103,6 +101,7 @@ function Episodes() {
             <div className='epCard'>
                 {episode.map((ep, index) => (
                     <>
+
                         <div className="ep-card" key={ep.id}>
                             <img className="card-image" src={data.image}></img>
                             <div className="ep-info">
@@ -110,15 +109,11 @@ function Episodes() {
                                 <h6 className="card-episodes">Ep {index + 1}</h6>
                                 <button className='favBtn'>Favourite</button>
                                 <button className='favBtn'>Unfavourite</button>
-                                <button className='favBtn' onClick={() => (addListen)}>Listen</button>
+                                <button className='favBtn' onClick={() => (setAudio)}>Listen</button>
                                 <h2 className="desc-title">Description</h2>
                                 <p className="card-desc">{ep.description}</p>
                             </div>
                         </div>
-                        {/* <audio controls>
-                            <source src={ep.file} type="audio/mp3" />
-                            Your browser does not support the audio element.
-                        </audio> */}
                     </>
                 ))}
             </div>
