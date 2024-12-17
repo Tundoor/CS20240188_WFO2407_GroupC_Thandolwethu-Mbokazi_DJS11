@@ -77,15 +77,19 @@ function Episodes() {
 
 
     let Favourites = JSON.parse(localStorage.getItem("Favourites") || "[]");
-    const favourited = (index) => {
+    const favourited = (index, image) => {
         const selectedEp = episode[index]
+        const currentTime = new Date().toDateString();
 
         Favourites.push({
             "id": id,
             'Season': seasonId,
             'title': selectedEp.title,
             'episodeID': selectedEp.episode,
-            ' file ': selectedEp.file
+            "image": image,
+            ' file ': selectedEp.file,
+            "desc": selectedEp.description,
+            "lastUpdated": currentTime
         })
 
         localStorage.setItem("Favourites", JSON.stringify(Favourites));
@@ -124,7 +128,7 @@ function Episodes() {
                         <div className="ep-info">
                             <h1 className="card-title">{ep.title}</h1>
                             <h6 className="card-episodes">Ep {index + 1}</h6>
-                            <button className='favBtn' onClick={() => { favourited(index) }}>Favourite</button>
+                            <button className='favBtn' onClick={() => { favourited(index, data.image) }}>Favourite</button>
                             <button className='favBtn'>Unfavourite</button>
                             <audio controls >
                                 <source src={ep.file} type="audio/mp3" />
