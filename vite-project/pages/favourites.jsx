@@ -1,18 +1,19 @@
-import { Link } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Favourites() {
+    // Initialize state with favourites from localStorage
+    const [favourites, setFavourites] = useState(() => {
+        return JSON.parse(localStorage.getItem("Favourites") || "[]");
+    });
 
-    let favourites = JSON.parse(localStorage.getItem("Favourites") || "[]")
-    console.log(favourites)
+    const removeFav = (index) => {
+        // Filter out the episode by its index in the array
+        const updatedFavourites = favourites.filter((_, i) => i !== index);
 
-    const removeFav = (index, id) => {
-        const itemIndex = favourites.findIndex(fav => fav.episodeID === index && fav.id === id);
-
-        if (itemIndex !== -1) {
-            favourites.splice(itemIndex, 1);
-
-            localStorage.setItem("Favourites", JSON.stringify(favourites));
-        }
+        // Update localStorage and state
+        localStorage.setItem("Favourites", JSON.stringify(updatedFavourites));
+        setFavourites(updatedFavourites);  // Update the state to trigger re-render
     };
 
     return (
@@ -27,8 +28,7 @@ function Favourites() {
 
                 <div className="main-cards">
                     {/*  Renders our shows on the browser */}
-
-                    {favourites && favourites.length > 0 ? (
+                    {favourites.length > 0 ? (
                         favourites.map((ep, index) => (
                             <div className="card" key={index}>
                                 <img className="card-image" src={ep.image} alt={ep.title} />
@@ -39,7 +39,7 @@ function Favourites() {
                                     <h6 className="card-episodes">
                                         Updated On: {ep.lastUpdated || "Unknown"}
                                     </h6>
-                                    <button className='favBtn' onClick={() => { removeFav(index, ep.id) }}>Unfavourite</button>
+                                    <button className="favBtn" onClick={() => removeFav(index)}>Unfavourite</button>
                                     <h2 className="desc-title">Description</h2>
                                     <p className="card-desc">{ep.desc || "No description available."}</p>
                                 </div>
@@ -51,7 +51,7 @@ function Favourites() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Favourites
+export default Favourites;
