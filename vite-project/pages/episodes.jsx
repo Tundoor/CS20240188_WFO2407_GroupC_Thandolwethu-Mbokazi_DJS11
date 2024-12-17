@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 
-
 function Episodes() {
+
     const [episode, setEpisode] = useState([]);
     const [show, setShow] = useState(null);
     const [data, setData] = useState(null);
@@ -76,6 +76,22 @@ function Episodes() {
     }, [show, seasonId]);
 
 
+    let Favourites = JSON.parse(localStorage.getItem("Favourites") || "[]");
+    const favourited = (index) => {
+        const selectedEp = episode[index]
+
+        Favourites.push({
+            "id": id,
+            'Season': seasonId,
+            'title': selectedEp.title,
+            'episodeID': selectedEp.episode,
+            ' file ': selectedEp.file
+        })
+
+        localStorage.setItem("Favourites", JSON.stringify(Favourites));
+    }
+
+
 
     if (loading) {
         return <p>Loading...</p>;
@@ -108,7 +124,7 @@ function Episodes() {
                         <div className="ep-info">
                             <h1 className="card-title">{ep.title}</h1>
                             <h6 className="card-episodes">Ep {index + 1}</h6>
-                            <button className='favBtn'>Favourite</button>
+                            <button className='favBtn' onClick={() => { favourited(index) }}>Favourite</button>
                             <button className='favBtn'>Unfavourite</button>
                             <audio controls >
                                 <source src={ep.file} type="audio/mp3" />
