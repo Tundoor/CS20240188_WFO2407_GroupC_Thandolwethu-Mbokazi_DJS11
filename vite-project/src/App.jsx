@@ -3,7 +3,6 @@ import PodcastLanding from '../pages/podcast';
 import Favourites from '../pages/favourites';
 import Episodes from "../pages/episodes";
 import AudioToggle from "../components/audio";
-import Welcome from "../pages/welcome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,8 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Welcome />} />
-          <Route path='/Home' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           {/* Takes us to the detail page for our podcasts */}
           <Route path="/home/podcast/id/:id" element={<PodcastLanding />} />
           <Route path="/home/podcast/id/:id/podcast/episodes/:seasonId" element={<Episodes />} />

@@ -75,7 +75,7 @@ function Episodes() {
         loadSeasonData();
     }, [show, seasonId]);
 
-
+    // Handles the favourite section of th
     let Favourites = JSON.parse(localStorage.getItem("Favourites") || "[]");
     const favourited = (index, image) => {
         const selectedEp = episode[index]
@@ -110,6 +110,7 @@ function Episodes() {
             <div className="showPodcastDiv">
                 <div className="podTitleDiv">
                     <h1 className="podcastTitle">Episodes for {show.title}</h1>
+
                 </div>
                 {/* Links Back to home page */}
                 <Link to="/home">
@@ -129,7 +130,6 @@ function Episodes() {
                             <h1 className="card-title">{ep.title}</h1>
                             <h6 className="card-episodes">Ep {index + 1}</h6>
                             <button className='favBtn' onClick={() => { favourited(index, data.image) }}>Favourite</button>
-                            <button className='favBtn'>Unfavourite</button>
                             <audio controls >
                                 <source src={ep.file} type="audio/mp3" />
                                 Your browser does not support the audio element.
