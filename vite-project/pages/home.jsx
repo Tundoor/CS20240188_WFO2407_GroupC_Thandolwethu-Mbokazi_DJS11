@@ -8,7 +8,6 @@ function Home() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedGenre, setSelectedGenre] = useState("allGenres");
-    const [theme, setTheme] = useState('light');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [updateOrder, setUpdateOrder] = useState("Most Recent");
     const [sortOrder, setSortOrder] = useState("A-Z");
@@ -59,8 +58,6 @@ function Home() {
         });
     };
 
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
-    const changeSortOrder = (newSortOrder) => setSortOrder(newSortOrder);
     const changeUpdateOrder = (newUpdateOrder) => setUpdateOrder(newUpdateOrder);
 
     // Genre matching 
@@ -74,9 +71,7 @@ function Home() {
         : pods.filter(pod => pod.genres.includes(parseInt(selectedGenre)));
 
     // Apply sorting logic
-    let sortedPods = sortByTitle(filteredPods);
-    sortedPods = sortByDate(sortedPods);
-
+    let sortedPods = sortByDate(filteredPods)
     if (error) {
         return <p1 className="Error">Failed To Fetch Data</p1>;
     }
@@ -87,22 +82,19 @@ function Home() {
 
     return (
         <>
-            <NavBar
-                closeModal={toggleModal}
-                changeTheme={setTheme}
-                changeSortOrder={changeSortOrder}
-                changeUpdateOrder={changeUpdateOrder}
-            />
+            <NavBar />
 
             <div className="home-div">
-                <div className="logo-div">
-                    <h1 className="logo">PodSphere</h1>
-                    <p>Where Every Story Finds A Listener</p>
-                </div>
                 <div className="main-div">
                     <h1 className="main-header">Our Selection</h1>
-                    {/* Attempt to make this dynamic */}
-                    <Selection onGenreChange={handleGenreChange} />
+                    <div className="settings">
+                        {/* Attempt to make this dynamic */}
+                        <Selection onGenreChange={handleGenreChange} />
+                        <div className="Update">
+                            <button className="mostUpdate" onClick={() => changeUpdateOrder('Most Recent')}> Most Recent Update</button>
+                            <button className="LeastUpdate" onClick={() => changeUpdateOrder('Least Recent')}>Least Recent Update</button>
+                        </div>
+                    </div>
 
                     <div className="main-cards" key={pods.id}>
                         {/*  Renders our shows on the browser */}
